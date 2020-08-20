@@ -3,7 +3,7 @@
 {% block content %}
 {# First Block (Presentation) #}
 	<div class="first" style="
-	background-image: url('/media/{{ background.image}}');">
+	background-image:url('{{ background.0.image.url }}');">
 		<div class="up_side">
 			<form action="" method="post">
 				{% csrf_token %}
@@ -44,7 +44,7 @@
 		<h1>Galerie Photo</h1>
 		<section id="photos">
 		{% for image in all_images %}
-			<img src="/media/{{ image }}">
+			<img src="{{ image.image.url }}">
 		{% endfor %}
 		</section>
 	</div>

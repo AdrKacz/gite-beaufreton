@@ -34,11 +34,11 @@ def index(request):
 	all_images = Photographie.objects.all().order_by('?')[:10]
 
 	# [DEBUG ONLY] Create more image from one
-	###
-	if all_images.count() < 10:
-		all_images = [image[0] for image in list(all_images.values_list('image'))] * 10
-		all_images = all_images[:10]
-	###
+	# ###
+	# if all_images.count() < 10:
+	# 	all_images = [image[0] for image in list(all_images.values_list('image'))] * 10
+	# 	all_images = all_images[:10]
+	# ###
 	
 
 	# Get the "caracteristique"
@@ -90,10 +90,13 @@ def details(request):
 	home_images = Photographie.objects.exclude(logement__exact=None).order_by('?')[:5]
 
 	# [DEBUG]
+	home_images = Photographie.objects.all().order_by('?')[:5]
+
+	# [DEBUG]
 	###
-	if home_images.count() < 5:
-		home_images = [image[:1] for image in list(home_images.values_list('image'))] * 5
-		home_images = home_images[:5]
+	# if home_images.count() < 5:
+	# 	home_images = [image[:1] for image in list(home_images.values_list('image'))] * 5
+	# 	home_images = home_images[:5]
 	###
 
 	# Variable init

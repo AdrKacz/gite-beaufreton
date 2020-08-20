@@ -13,11 +13,11 @@
 	<div class="first">
 		<h1 class="left"> Gîte Les Pieds Dans L'Herbe</h1>
 		<div id="photos_logement">
-			<img src="/media/{{ big_image }}">
+			<img src="{{ big_image.0.image.url }}">
 
 			<section>
 				{% for image in home_images %}
-					<img src="/media/{{ image }}">
+					<img src="{{ image.image.url }}">
 				{% endfor %}
 			</section>
 			
