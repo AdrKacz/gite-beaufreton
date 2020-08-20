@@ -28,7 +28,7 @@ def index(request):
 	# Do not retreive "image" to save memory
 	# Only take those who can be put on background
 	# Shuffle and take the first one
-	background_image = Photographie.objects.filter(page_principale__exact=True).order_by('?')[0]
+	background_image = Photographie.objects.filter(page_principale__exact=True).order_by('?')[:1]
 
 	# Get the other image for the gallery
 	all_images = Photographie.objects.all().order_by('?')[:10]
@@ -92,13 +92,13 @@ def details(request):
 	# [DEBUG]
 	###
 	if home_images.count() < 5:
-		home_images = [image[0] for image in list(home_images.values_list('image'))] * 5
+		home_images = [image[:1] for image in list(home_images.values_list('image'))] * 5
 		home_images = home_images[:5]
 	###
 
 	# Variable init
 	context = {
-	'big_image': home_images[0],
+	'big_image': home_images[:1],
 	'home_images': home_images[1:],
 	}
 
@@ -159,11 +159,11 @@ def details(request):
 	night_price = 0
 	if Logement.objects.all().count() > 0:
 		# To modify when there will be numerous "logement"
-		nigh_price = Logement.objects.get(pk=1).prix
+		night_price = Logement.objects.only("prix")[:1].prix
 
 
 	context['form_options'] = form_options
-	context['night_price'] = nigh_price
+	context['night_price'] = night_price
 	context['form'] = form
 
 	return render(
@@ -224,11 +224,11 @@ def booking(request):
 	night_price = 0
 	if Logement.objects.all().count() > 0:
 		# To modify when there will be numerous "logement"
-		nigh_price = Logement.objects.only("prix")[0].prix
+		night_price = Logement.objects.only("prix")[:1].prix
 
 
 	context['form_options'] = form_options
-	context['night_price'] = nigh_price
+	context['night_price'] = night_price
 	context['form'] = form
 
 	return render(
