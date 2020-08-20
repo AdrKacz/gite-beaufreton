@@ -59,7 +59,7 @@ class Reservation(models.Model):
 	# Not primary key for simplicity, serve just as comparaison
 	uid = models.CharField(
 		max_length=100,
-		default=uuid.uuid4,
+		default=str(uuid.uuid4),
 		help_text='Unique identifiant pour cette reservation, ne pas changer')
 
 	class Meta:
