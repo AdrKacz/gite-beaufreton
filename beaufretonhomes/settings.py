@@ -33,7 +33,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '1o9g+3s6*+jt%)u3^8)usqyw!8h=gl
 DEBUG = os.environ.get("DJANGO_DEBUG", '') != "False"
 
 # Set hosts to allow any app on ??? and the local testing URL
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = [   '127.0.0.1',
+                    'vast-beach-36724.herokuapp.com']
 
 
 # Application definition
