@@ -47,7 +47,7 @@
 			<form action="", method="post">
 				{% csrf_token %}
 				<div>
-					<h2 id="prix">Prix: ???€</h2>
+					<h2 id="prix" price="{{ night_price }}">Prix: ???€</h2>
 					<div class="date-container">
 						{{ form.start_date }}
 						{{ form.end_date }}

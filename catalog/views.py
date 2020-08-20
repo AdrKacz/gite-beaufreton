@@ -155,7 +155,15 @@ def details(request):
 		if field.help_text == "option":
 			form_options.append((field, Option.objects.get(pk=int(field.auto_id[3:]))))
 
+	# Price of the night
+	night_price = 0
+	if Logement.objects.all().count() > 0:
+		# To modify when there will be numerous "logement"
+		nigh_price = Logement.objects.only("prix")[0].prix
+
+
 	context['form_options'] = form_options
+	context['night_price'] = nigh_price
 	context['form'] = form
 
 	return render(
@@ -212,7 +220,15 @@ def booking(request):
 		if field.help_text == "option":
 			form_options.append((field, Option.objects.get(pk=int(field.auto_id[3:]))))
 
+	# Price of the night
+	night_price = 0
+	if Logement.objects.all().count() > 0:
+		# To modify when there will be numerous "logement"
+		nigh_price = Logement.objects.only("prix")[0].prix
+
+
 	context['form_options'] = form_options
+	context['night_price'] = nigh_price
 	context['form'] = form
 
 	return render(

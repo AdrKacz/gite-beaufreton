@@ -4,6 +4,8 @@ const option_section = document.querySelector("#price_details > section");
 const div_night = document.querySelector("section#price_details > div:first-child");
 const price = document.querySelector("#price_total");
 
+const day_price = parseFloat(document.querySelector("#price_total").getAttribute("price"));
+
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 function getDateDifferenceInDays(start_date, end_date) {
@@ -21,8 +23,6 @@ function updatePrice() {
 
 	let start_date;
 	let end_date;
-
-	let day_price = 0; // day_price is in id_start_date
 
 	// Clean the option section
 	while (option_section.childElementCount > 0) {
@@ -89,8 +89,6 @@ function updatePrice() {
 				// Sanetize should occur here on element.value
 				if (element.id === "id_start_date") {
 					start_date = new Date(element.value);
-					// Get the price of one day
-					day_price = element.getAttribute('price');
 				}
 				else if (element.id === "id_end_date") {
 					end_date = new Date(element.value);

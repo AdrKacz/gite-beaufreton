@@ -18,8 +18,7 @@ class PickDatesForm(forms.Form):
 	start_date = forms.DateField(
 		help_text="Arrivée",
 		required=True,
-		widget=forms.HiddenInput(attrs={
-			"price": Logement.objects.only("prix")[0].prix}))
+		widget=forms.HiddenInput(attrs={}))
 
 	end_date = forms.DateField(
 		help_text="Départ",
