@@ -27,10 +27,6 @@ class Logement(models.Model):
 	class Meta:
 		ordering = ['nom']
 
-	def get_absolute_url(self):
-		"""Returns the url to access a particular "logement" instance"""
-		return reverse('logement-detail', args=[str(self.id)])
-
 	def __str__(self):
 		return self.nom
 

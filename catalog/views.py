@@ -159,7 +159,7 @@ def details(request):
 	night_price = 0
 	if Logement.objects.all().count() > 0:
 		# To modify when there will be numerous "logement"
-		nigh_price = Logement.objects.only("prix")[0].prix
+		nigh_price = Logement.objects.get(pk=1).prix
 
 
 	context['form_options'] = form_options
