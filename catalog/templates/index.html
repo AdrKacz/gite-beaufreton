@@ -1,0 +1,51 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{# First Block (Presentation) #}
+	<div class="first" style="
+	background-image: url('/media/{{ background.image}}');">
+		<div class="up_side">
+			<form action="" method="post">
+				{% csrf_token %}
+				<div class="date-container">
+					{% for field in form %}
+						{{ field }}
+					{% endfor %}
+				
+					<p><span>{{form.start_date.help_text}}</span> - <span>{{ form.end_date.help_text}}</span></p>
+				</div>
+				<!-- Make the input button with the Glass -->
+				<button type="submit"><i class="fas fa-search"></i></button>		
+			</form>
+		</div>
+		<div class="left_side">
+			<p>Un bol d'air frais !</p>
+
+			<p><a href="#third-page" class="button">Découvrir</a></p>
+		</div>
+	</div>
+
+{# Second Block (Characteristic) #}
+	<div class="second">
+		<h1>Les caractéristiques du gîte</h1>
+
+		<section id="features">
+			{% for characteristic in  characteristics%}
+				<article>
+				<p><i class="{{ characteristic.icon }}"></i></p>
+				<p>{{ characteristic.description | linebreaks }}</p>
+			</article>
+			{% endfor %}
+		</section>
+	</div>
+
+{# Thirs Block (Galery) #}
+	<div class="third" id="third-page">
+		<h1>Galerie Photo</h1>
+		<section id="photos">
+		{% for image in all_images %}
+			<img src="/media/{{ image }}">
+		{% endfor %}
+		</section>
+	</div>
+{% endblock content %}

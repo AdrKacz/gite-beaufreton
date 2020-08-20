@@ -1,0 +1,82 @@
+{% extends "base_generic.html" %}
+
+{% block add_on %}
+	{% load static %}
+	<script type="text/javascript" src="{% static 'scripts/price_update_page_two.js' %}" defer></script>
+
+	{% load static %}
+	<script type="text/javascript" src="{% static 'scripts/confirm_scroll.js' %}" defer></script>
+{% endblock add_on %}
+
+{% block content %}
+{# Fist Block (Home Presentation) #}
+	<div class="first">
+		<h1 class="left"> Gîte Les Pieds Dans L'Herbe</h1>
+		<div id="photos_logement">
+			<img src="/media/{{ big_image }}">
+
+			<section>
+				{% for image in home_images %}
+					<img src="/media/{{ image }}">
+				{% endfor %}
+			</section>
+			
+		</div>
+	</div>
+
+{# Second Block (Option and Dates Check) #}
+	<div class="second">
+		<section id="info_logement">
+			<section>
+				<article>
+					<p>Logement entier</p>
+					<p>Vous aurez le logement rien que pour vous</p>
+				</article>
+
+				<article>
+					<p>Propre et rangé</p>
+				</article>
+
+				<article>
+					<p>Annulation gratuite jusqu'à 24 heures avec l'arrivé</p>
+					<p>Au-delà, annulez avant l'arrivée et obtenez un remboursement intégral, moins la première nuit et les frais de service</p>
+				</article>
+			</section>
+
+			<!-- Form Option and Dates-->
+			<form action="", method="post">
+				{% csrf_token %}
+				<div>
+					<h2 id="prix">Prix: ???€</h2>
+					<div class="date-container">
+						{{ form.start_date }}
+						{{ form.end_date }}
+				
+						<p><span>{{form.start_date.help_text}}</span> - <span>{{ form.end_date.help_text}}</span></p>
+					</div>
+					<button type="submit">Vérifier la disponibilité</button>
+				</div>
+
+				<article>
+					{% for item in  form_options %}
+						<section>
+							{{ item.0}}	
+							{% if item.1.plusieurs %}
+
+								<label for="{{ item.0.id_for_label }}" price="{{ item.1.prix }}">{{ item.0.label }}(s) (+ {{ item.1.prix }}€/{{ item.1.nom }})</label>
+
+							{% else %}
+
+								<label for="{{ item.0.id_for_label }}" price="{{ item.1.prix }}">{{ item.0.label }} (+ {{ item.1.prix }}€)</label>
+
+							{% endif %}
+						</section>
+					{% endfor %}
+				</article>
+			</form>
+	</div>
+		
+	</section>
+
+	<div id="div-for-em"></div>
+{% endblock content %}
