@@ -23,15 +23,6 @@ def index(request):
 	"""View function for home page of site.
 	Handle a form in its core.
 	"""
-	# Get one image to put as background
-
-	# Do not retreive "image" to save memory
-	# Only take those who can be put on background
-	# Shuffle and take the first one
-	background_image = Photographie.objects.filter(page_principale__exact=True).order_by('?')[:1]
-
-	# Get the other image for the gallery
-	all_images = Photographie.objects.all().order_by('?')[:10]
 
 	# [DEBUG ONLY] Create more image from one
 	# ###
@@ -39,14 +30,23 @@ def index(request):
 	# 	all_images = [image[0] for image in list(all_images.values_list('image'))] * 10
 	# 	all_images = all_images[:10]
 	# ###
-	
+
+	background_image = "media/placeholder.jpg"
+	all_images = ["media/placeholder.jpg"] * 10
+	if Photographie.objects.all().count() >= 10:
+		# Get one image to put as background
+		# Only take those who can be put on background
+		# Shuffle and take the first one
+		background_image = Photographie.objects.filter(page_principale__exact=True).order_by('?')[:1]
+		# Get the other image for the gallery
+		all_images = Photographie.objects.all().order_by('?')[:10]
 
 	# Get the "caracteristique"
 	characteristics = Caracteristique.objects.all().order_by("z_axis")[:8]
 
 	# Create the context
 	context = {
-	'background': background_image, 
+	'background': background_image,
 	'all_images': all_images,
 	'characteristics': characteristics}
 
@@ -86,18 +86,20 @@ def details(request):
 	Home details and second date selection.
 	"""
 
-	# Get 5 photos of the home at random
-	home_images = Photographie.objects.exclude(logement__exact=None).order_by('?')[:5]
+	# # [DEBUG ONLY]
+	# home_images = Photographie.objects.all().order_by('?')[:5]
 
-	# [DEBUG]
-	home_images = Photographie.objects.all().order_by('?')[:5]
-
-	# [DEBUG]
+	# [DEBUG ONLY]
 	###
 	# if home_images.count() < 5:
 	# 	home_images = [image[:1] for image in list(home_images.values_list('image'))] * 5
 	# 	home_images = home_images[:5]
 	###
+
+	home_images = ["media/placeholder.jpg"] * 5
+	if Photographie.objects.exclude(logement__exact=None).count() >= 5:
+		# Get 5 photos of the home at random
+		home_images = Photographie.objects.exclude(logement__exact=None).order_by('?')[:5]
 
 	# Variable init
 	context = {
