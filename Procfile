@@ -1,1 +1,0 @@
-web: gunicorn beaufretonhomes.wsgi --log-file -
